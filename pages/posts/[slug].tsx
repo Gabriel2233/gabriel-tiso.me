@@ -2,17 +2,35 @@ import matter from "gray-matter";
 import fs from "fs";
 import path from "path";
 import renderToString from "next-mdx-remote/render-to-string";
+import hydrate from "next-mdx-remote/hydrate";
 import mdxPrism from "mdx-prism";
 import readingTime from "reading-time";
 import externalLinks from "remark-external-links";
 import { GetStaticPaths, GetStaticProps } from "next";
-import getAllPosts, { getPostBySlug, getPostSlugs } from "../../lib/blogApi";
+import getAllPosts from "../../lib/blogApi";
+import { Box, Flex } from "@chakra-ui/core";
 
-const Post = (props) => {
+export type Post = {
+  readingTime: {
+    text: string;
+  };
+  frontMatter: {
+    title: string;
+    date: string;
+    description: string;
+    author: string;
+  };
+  slug: string;
+  source: any;
+};
+
+const Post = (postData: Post) => {
+  const content = hydrate(postData.source);
+
   return (
-    <div>
-      <h1>Post</h1>
-    </div>
+    <Flex w="full" overflowY="hidden">
+      <div>{content}</div>
+    </Flex>
   );
 };
 
