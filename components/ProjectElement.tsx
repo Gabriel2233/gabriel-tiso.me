@@ -1,21 +1,8 @@
 import { Flex, Heading, Text } from "@chakra-ui/core";
-import { formatDistance, parseISO } from "date-fns";
+import { PageWithProject } from "../types/types";
+import Badge from "./Badge";
 
-export type PostCardProps = {
-  title: string;
-  description: string;
-  date: string;
-  slug: string;
-  author: string;
-};
-
-type PageProps = {
-  postData: PostCardProps;
-};
-
-const PostElement: React.FC<PageProps> = ({ postData }) => {
-  const postDateFromNow = formatDistance(parseISO(postData.date), new Date());
-
+const ProjectElement: React.FC<PageWithProject> = ({ projectData }) => {
   return (
     <Flex
       flexDir="column"
@@ -34,12 +21,11 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
           paddingX={6}
           paddingY={4}
         >
-          {postData.title}
+          {projectData.name}
         </Heading>
-
-        <Text fontSize="small" color="black.900" width="100px" paddingRight={8}>
-          {postDateFromNow} ago
-        </Text>
+        {projectData.badges.map((badge) => (
+          <Badge data={badge} key={badge} />
+        ))}
       </Flex>
 
       <Text
@@ -49,10 +35,10 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
         width="full"
         color="black.600"
       >
-        {postData.description}
+        {projectData.description}
       </Text>
     </Flex>
   );
 };
 
-export default PostElement;
+export default ProjectElement;

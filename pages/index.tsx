@@ -1,21 +1,22 @@
 import {
   Box,
-  Button,
   Flex,
   Heading,
   IconButton,
+  Text,
   useColorMode,
 } from "@chakra-ui/core";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import PostElement, { PostCardProps } from "../components/PostElement";
+import Header from "../components/Header";
+import ProjectElement from "../components/ProjectElement";
+import PostElement from "../components/PostElement";
 import getAllPosts from "../lib/blogApi";
+import { AboutHomePage } from "../_data/about";
+import { Projects } from "../_data/projects";
+import { PageWithPostArr } from "../types/types";
 
-interface PageProps {
-  allPosts: PostCardProps[];
-}
-
-const Home: React.FC<PageProps> = ({ allPosts }) => {
+const Home: React.FC<PageWithPostArr> = ({ posts }) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -27,42 +28,55 @@ const Home: React.FC<PageProps> = ({ allPosts }) => {
         justifyContent="flex-start"
         flexDir="column"
       >
-        <Flex w="100%" alignItems="center" justifyContent="space-between">
-          <Heading size="lg" color="black.300" paddingY={16}>
-            Hey, I'm Gabriel Tiso 🚀
+        <Header>
+          <IconButton
+            aria-label={`Switch to ${
+              colorMode === "light" ? "dark" : "light"
+            } mode`}
+            variant="ghost"
+            color="current"
+            ml="2"
+            fontSize="20px"
+            onClick={toggleColorMode}
+            icon={colorMode === "light" ? "moon" : "sun"}
+          />
+        </Header>
+        <Flex flexDir="column" w="100%">
+          <Flex flexDir="column">
+            <Heading size="xl" m={6}>
+              Hey, I'm Gabriel Tiso ⚡
+            </Heading>
+            <Text m={6} size="small">
+              {AboutHomePage}
+            </Text>
+          </Flex>
+
+          <>
+            <Heading size="xl" m={6}>
+              Blog
+            </Heading>
+
+            {posts.map((post) => (
+              <Link
+                href="/blog/[slug]"
+                as={`/blog/${post.slug}`}
+                key={post.slug}
+              >
+                <Box>
+                  <PostElement postData={post} />
+                </Box>
+              </Link>
+            ))}
+          </>
+        </Flex>
+
+        <Flex flexDir="column" w="full">
+          <Heading size="xl" m={6}>
+            Projects
           </Heading>
 
-          <Flex>
-            <Button borderRadius="sm" marginX={2}>
-              Projects
-            </Button>
-            <Button borderRadius="sm" marginX={2}>
-              About
-            </Button>
-            <IconButton
-              aria-label={`Switch to ${
-                colorMode === "light" ? "dark" : "light"
-              } mode`}
-              variant="ghost"
-              color="current"
-              ml="2"
-              fontSize="20px"
-              onClick={toggleColorMode}
-              icon={colorMode === "light" ? "moon" : "sun"}
-            />
-          </Flex>
-        </Flex>
-        <Flex flexDir="column" w="100%">
-          {allPosts.map((post: PostCardProps) => (
-            <Link
-              href="/posts/[slug]"
-              as={`/posts/${post.slug}`}
-              key={post.slug}
-            >
-              <Box>
-                <PostElement postData={post} />
-              </Box>
-            </Link>
+          {Projects.map((project) => (
+            <ProjectElement projectData={project} key={project.githubLink} />
           ))}
         </Flex>
       </Flex>
@@ -73,15 +87,9 @@ const Home: React.FC<PageProps> = ({ allPosts }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPosts = getAllPosts([
-    "date",
-    "slug",
-    "description",
-    "title",
-    "author",
-  ]);
+  const posts = getAllPosts(["date", "slug", "description", "title", "author"]);
 
   return {
-    props: { allPosts },
+    props: { posts },
   };
 };

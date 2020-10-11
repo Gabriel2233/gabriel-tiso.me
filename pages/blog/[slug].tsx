@@ -8,24 +8,13 @@ import readingTime from "reading-time";
 import externalLinks from "remark-external-links";
 import { GetStaticPaths, GetStaticProps } from "next";
 import getAllPosts from "../../lib/blogApi";
-import { Box, Flex } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/core";
+import { Post as PostType } from "../../types/types";
 
-export type Post = {
-  readingTime: {
-    text: string;
-  };
-  frontMatter: {
-    title: string;
-    date: string;
-    description: string;
-    author: string;
-  };
-  slug: string;
-  source: any;
-};
-
-const Post = (postData: Post) => {
+const Post = (postData: PostType) => {
   const content = hydrate(postData.source);
+
+  console.log(postData);
 
   return (
     <Flex w="full" overflowY="hidden">
