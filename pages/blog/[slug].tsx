@@ -8,17 +8,57 @@ import readingTime from "reading-time";
 import externalLinks from "remark-external-links";
 import { GetStaticPaths, GetStaticProps } from "next";
 import getAllPosts from "../../lib/blogApi";
-import { Flex } from "@chakra-ui/core";
+import { Flex, Heading, Text } from "@chakra-ui/core";
 import { Post as PostType } from "../../types/types";
+import Header from "../../components/Header";
+import { Footer } from "../../components/Footer";
+import { BackButton } from "../../components/BackButton";
 
 const Post = (postData: PostType) => {
   const content = hydrate(postData.source);
 
-  console.log(postData);
-
   return (
-    <Flex w="full" overflowY="hidden">
-      <div>{content}</div>
+    <Flex
+      w="full"
+      overflowY="hidden"
+      alignItems="center"
+      justifyContent="center"
+      flexDir="column"
+    >
+      <Flex
+        w="100%"
+        alignItems="center"
+        justifyContent="center"
+        flexDir="column"
+      >
+        <Header>
+          <BackButton />
+        </Header>
+
+        <Flex
+          w="70%"
+          alignItems="flex-start"
+          justifyContent="center"
+          flexDir="column"
+          py={6}
+        >
+          <Flex>
+            <Heading>{postData.frontMatter.title}</Heading>
+          </Flex>
+
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            w="full"
+            py={6}
+          >
+            <Text fontSize="md">By {postData.frontMatter.author}</Text>
+            <Text fontSize="md">{postData.readingTime.text}</Text>
+          </Flex>
+          {content}
+          <Footer />
+        </Flex>
+      </Flex>
     </Flex>
   );
 };

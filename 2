@@ -3,9 +3,7 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 
 const OpaqueNav = styled(Flex)`
-  position: fixed;
-  top: 0;
-  backdrop-filter: saturate(120%) blur(30px);
+  backdrop-filter: saturate(180%) blur(20px);
   transition: background-color 0.1 ease-in-out;
 `;
 
@@ -13,21 +11,22 @@ const Header: React.FC = ({ children }) => {
   const { colorMode } = useColorMode();
 
   return (
-    <Flex
+    <OpaqueNav
       alignItems="center"
-      justifyContent="center"
+      justifyContent="space-between"
       paddingY={8}
       mb={4}
-      w="100vw"
-      background={colorMode === "light" ? "white" : "gray.950"}
+      w="full"
+      background={colorMode === "light" ? "white" : "gray.400"}
     >
-      <OpaqueNav
+      <Flex
         alignItems="center"
         justifyContent="space-between"
         paddingY={6}
-        paddingX={6}
-        w={["100%", null, "80%"]}
-        background={colorMode === "light" ? "white" : "gray.950"}
+        w={["100%", null, "70%"]}
+        po="fixed"
+        zIndex={10}
+        top={0}
       >
         {children}
 
@@ -43,13 +42,13 @@ const Header: React.FC = ({ children }) => {
             </Button>
           </Link>
           <Link href="/about">
-            <Button borderRadius="sm" background="transparent" mr={2}>
+            <Button borderRadius="sm" background="transparent">
               About
             </Button>
           </Link>
         </Flex>
-      </OpaqueNav>
-    </Flex>
+      </Flex>
+    </OpaqueNav>
   );
 };
 

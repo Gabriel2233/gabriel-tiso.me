@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/core";
 import { GetStaticProps } from "next";
 import Link from "next/link";
+import Head from "next/head";
 import Header from "../components/Header";
 import ProjectElement from "../components/ProjectElement";
 import PostElement from "../components/PostElement";
@@ -15,6 +16,7 @@ import getAllPosts from "../lib/blogApi";
 import { AboutHomePage } from "../_data/about";
 import { Projects } from "../_data/projects";
 import { PageWithPostArr } from "../types/types";
+import { Footer } from "../components/Footer";
 
 const Home: React.FC<PageWithPostArr> = ({ posts }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -22,7 +24,7 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
   return (
     <Flex w="100vw" h="100vh" alignItems="center" flexDir="column">
       <Flex
-        w="70%"
+        w={["100%", null, "70%"]}
         height="100%"
         alignItems="center"
         justifyContent="flex-start"
@@ -79,6 +81,7 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
             <ProjectElement projectData={project} key={project.githubLink} />
           ))}
         </Flex>
+        <Footer />
       </Flex>
     </Flex>
   );

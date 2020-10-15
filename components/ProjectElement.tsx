@@ -13,7 +13,12 @@ const ProjectElement: React.FC<PageWithProject> = ({ projectData }) => {
       borderRadius="sm"
       borderColor="black.400"
     >
-      <Flex width="full" alignItems="center" justifyContent="space-between">
+      <Flex
+        width="full"
+        alignItems="center"
+        justifyContent="space-between"
+        flexDir={["column", null, "row"]}
+      >
         <Heading
           textAlign="start"
           size="lg"
@@ -23,9 +28,17 @@ const ProjectElement: React.FC<PageWithProject> = ({ projectData }) => {
         >
           {projectData.name}
         </Heading>
-        {projectData.badges.map((badge) => (
-          <Badge data={badge} key={badge} />
-        ))}
+        <Flex
+          alignItems="center"
+          justifyContent={["flex-start", null, "flex-end"]}
+          flexDir="row"
+          w="full"
+          px={4}
+        >
+          {projectData.badges.map((badge) => (
+            <Badge data={badge} key={badge} />
+          ))}
+        </Flex>
       </Flex>
 
       <Text

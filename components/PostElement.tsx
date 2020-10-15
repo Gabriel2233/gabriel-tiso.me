@@ -26,7 +26,12 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
       borderRadius="sm"
       borderColor="black.400"
     >
-      <Flex width="full" alignItems="center" justifyContent="space-between">
+      <Flex
+        width="full"
+        alignItems="center"
+        justifyContent="space-between"
+        flexDir={["column", null, "row"]}
+      >
         <Heading
           textAlign="start"
           size="lg"
@@ -37,9 +42,21 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
           {postData.title}
         </Heading>
 
-        <Text fontSize="small" color="black.900" width="100px" paddingRight={8}>
-          {postDateFromNow} ago
-        </Text>
+        <Flex
+          w="full"
+          alignItems="center"
+          justifyContent={["flex-start", null, "flex-end"]}
+        >
+          <Text
+            fontSize="small"
+            color="gray.600"
+            pl={8}
+            pr={4}
+            py={[4, null, 0]}
+          >
+            {postDateFromNow} ago
+          </Text>
+        </Flex>
       </Flex>
 
       <Text

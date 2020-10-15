@@ -6,10 +6,9 @@ const Badge: React.FC<BadgeProps> = ({ data }) => {
   return (
     <Flex
       fontSize="small"
-      marginX={2}
+      m={2}
       backgroundColor={colorMode === "dark" ? "gray.700" : "gray.200"}
-      paddingX={2}
-      paddingY={1}
+      p={1}
       borderRadius="sm"
     >
       <Text color={colorMode === "light" ? "blue.500" : "gray.500"}>
