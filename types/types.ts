@@ -46,3 +46,16 @@ export type CardProps = {
 export type BadgeProps = {
   data: string;
 };
+
+export type BlogSeoProps = {
+  title: string;
+  date: string;
+  description: string;
+  author: string;
+  url: string;
+};
+
+export type Tech = {
+  name: string;
+  path: string;
+};

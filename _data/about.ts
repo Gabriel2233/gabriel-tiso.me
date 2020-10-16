@@ -1,2 +1,0 @@
-export const AboutHomePage =
-  "	Lorem ipsum morbi etiam donec bibendum habitant pulvinar bibendum molestie nulla sociosqu, ultrices nunc integer congue sit pretium scelerisque etiam eleifend rhoncus. porttitor massa nostra massa blandit convallis placerat senectus, fermentum facilisis diam habitant aptent donec, libero semper curabitur potenti condimentum mattis. nisi eros ornare habitant commodo euismod molestie elit ante lorem suscipit enim nec, primis urna egestas viverra maecenas habitasse nulla fermentum netus turpis cursus risus, etia. ";

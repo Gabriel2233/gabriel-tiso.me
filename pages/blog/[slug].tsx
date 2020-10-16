@@ -13,53 +13,60 @@ import { Post as PostType } from "../../types/types";
 import Header from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { BackButton } from "../../components/BackButton";
+import { BlogSeo } from "../../components/BlogSeo";
 
 const Post = (postData: PostType) => {
   const content = hydrate(postData.source);
 
   return (
-    <Flex
-      w="full"
-      overflowY="hidden"
-      alignItems="center"
-      justifyContent="center"
-      flexDir="column"
-    >
+    <>
+      <BlogSeo
+        url={`https://gabriel-tiso-blog.vercel.app/blog/${postData.slug}`}
+        {...postData.frontMatter}
+      />
       <Flex
-        w="100%"
+        w="full"
+        overflowY="hidden"
         alignItems="center"
         justifyContent="center"
         flexDir="column"
       >
-        <Header>
-          <BackButton />
-        </Header>
-
         <Flex
-          w="70%"
-          alignItems="flex-start"
+          w="100%"
+          alignItems="center"
           justifyContent="center"
           flexDir="column"
-          py={6}
         >
-          <Flex>
-            <Heading>{postData.frontMatter.title}</Heading>
-          </Flex>
+          <Header>
+            <BackButton />
+          </Header>
 
           <Flex
-            alignItems="center"
-            justifyContent="space-between"
-            w="full"
+            w="70%"
+            alignItems="flex-start"
+            justifyContent="center"
+            flexDir="column"
             py={6}
           >
-            <Text fontSize="md">By {postData.frontMatter.author}</Text>
-            <Text fontSize="md">{postData.readingTime.text}</Text>
+            <Flex>
+              <Heading>{postData.frontMatter.title}</Heading>
+            </Flex>
+
+            <Flex
+              alignItems="center"
+              justifyContent="space-between"
+              w="full"
+              py={6}
+            >
+              <Text fontSize="md">By {postData.frontMatter.author}</Text>
+              <Text fontSize="md">{postData.readingTime.text}</Text>
+            </Flex>
+            {content}
+            <Footer />
           </Flex>
-          {content}
-          <Footer />
         </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 };
 
