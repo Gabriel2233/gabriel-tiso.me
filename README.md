@@ -5,7 +5,7 @@ This is my personal Blog, where I talk (or where I was supposed to talk about ma
 
 ## Demo :eyes:
 
-A working demo can be find [Here](https://gabriel-tiso-blog.vercel.app)
+A working demo can be find [Right Here](https://gabriel-tiso-blog.vercel.app)
 
 ## Technologies :wrench:
 
