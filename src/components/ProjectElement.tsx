@@ -1,6 +1,6 @@
-import { Flex, Heading, Text } from "@chakra-ui/core";
-import { PageWithProject } from "../types/types";
-import Badge from "./Badge";
+import { Flex, Heading, Text } from '@chakra-ui/react';
+import { PageWithProject } from '../types/types';
+import Badge from './Badge';
 
 const ProjectElement: React.FC<PageWithProject> = ({ projectData }) => {
   return (
@@ -17,7 +17,7 @@ const ProjectElement: React.FC<PageWithProject> = ({ projectData }) => {
         width="full"
         alignItems="center"
         justifyContent="space-between"
-        flexDir={["column", null, "row"]}
+        flexDir={['column', null, 'row']}
       >
         <Heading
           textAlign="start"
@@ -30,7 +30,7 @@ const ProjectElement: React.FC<PageWithProject> = ({ projectData }) => {
         </Heading>
         <Flex
           alignItems="center"
-          justifyContent={["flex-start", null, "flex-end"]}
+          justifyContent={['flex-start', null, 'flex-end']}
           flexDir="row"
           w="full"
           px={4}

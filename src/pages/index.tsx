@@ -5,24 +5,26 @@ import {
   IconButton,
   Text,
   useColorMode,
-} from "@chakra-ui/core";
-import { GetStaticProps } from "next";
-import Link from "next/link";
-import Header from "../components/Header";
-import ProjectElement from "../components/ProjectElement";
-import PostElement from "../components/PostElement";
-import getAllPosts from "../lib/blogApi";
-import { Projects } from "../_data/projects";
-import { PageWithPostArr } from "../types/types";
-import { Footer } from "../components/Footer";
-import { NextSeo } from "next-seo";
-import { Meta } from "../components/meta";
-import { ExternalLink } from "../components/ExternalLink";
+} from '@chakra-ui/react';
+import { GetStaticProps } from 'next';
+import { Projects } from '../_data/projects';
+import { PageWithPostArr } from '../types/types';
+import { Footer } from '../components/Footer';
+import { NextSeo } from 'next-seo';
+import { Meta } from '../components/meta';
+import { ExternalLink } from '../components/ExternalLink';
+import { FiMoon, FiSun } from 'react-icons/fi';
 
-const title = "Gabriel Tiso - Developer";
-const url = "https://gabriel-tiso-blog.vercel.app";
+import Link from 'next/link';
+import Header from '../components/Header';
+import ProjectElement from '../components/ProjectElement';
+import PostElement from '../components/PostElement';
+import getAllPosts from '../utils/blogApi';
+
+const title = 'Gabriel Tiso - Developer';
+const url = 'https://gabriel-tiso-blog.vercel.app';
 const description =
-  "My personal blog, where I share my thoughts and experiences regarding tech, projects and life.";
+  'My personal blog, where I share my thoughts and experiences regarding tech, projects and life.';
 
 const Home: React.FC<PageWithPostArr> = ({ posts }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -38,7 +40,7 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
       />
       <Flex w="100vw" h="100vh" alignItems="center" flexDir="column">
         <Flex
-          w={["100%", null, "70%"]}
+          w={['100%', null, '70%']}
           height="100%"
           alignItems="center"
           justifyContent="flex-start"
@@ -47,14 +49,14 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
           <Header>
             <IconButton
               aria-label={`Switch to ${
-                colorMode === "light" ? "dark" : "light"
+                colorMode === 'light' ? 'dark' : 'light'
               } mode`}
               variant="ghost"
               color="current"
               ml="2"
               fontSize="20px"
               onClick={toggleColorMode}
-              icon={colorMode === "light" ? "moon" : "sun"}
+              icon={colorMode === 'dark' ? <FiMoon /> : <FiSun />}
             />
           </Header>
           <Flex flexDir="column" w="100%">
@@ -65,9 +67,9 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
               <Text m={6} size="small">
                 Welcome to my blog, where I talk about tech stuff and share my
                 knowledgements and experiences with you guys. I built this blog
-                using{" "}
-                <ExternalLink href="https://nextjs.org"> NextJs</ExternalLink>,{" "}
-                <ExternalLink href="https://mdxjs.com">MDX</ExternalLink> and{" "}
+                using{' '}
+                <ExternalLink href="https://nextjs.org"> NextJs</ExternalLink>,{' '}
+                <ExternalLink href="https://mdxjs.com">MDX</ExternalLink> and{' '}
                 <ExternalLink href="https://chakra-ui.com">
                   ChakraUI
                 </ExternalLink>
@@ -116,7 +118,7 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getAllPosts(["date", "slug", "description", "title", "author"]);
+  const posts = getAllPosts(['date', 'slug', 'description', 'title', 'author']);
 
   return {
     props: { posts },

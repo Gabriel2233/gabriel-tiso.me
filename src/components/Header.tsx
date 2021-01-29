@@ -1,6 +1,6 @@
-import { Button, Flex, useColorMode } from "@chakra-ui/core";
-import styled from "@emotion/styled";
-import Link from "next/link";
+import { Button, Flex, useColorMode } from '@chakra-ui/react';
+import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const OpaqueNav = styled(Flex)`
   position: fixed;
@@ -19,15 +19,15 @@ const Header: React.FC = ({ children }) => {
       paddingY={8}
       mb={4}
       w="100vw"
-      background={colorMode === "light" ? "white" : "gray.950"}
+      background={colorMode === 'light' ? 'white' : 'gray.950'}
     >
       <OpaqueNav
         alignItems="center"
         justifyContent="space-between"
         paddingY={6}
         paddingX={6}
-        w={["100%", null, "80%"]}
-        background={colorMode === "light" ? "white" : "gray.950"}
+        w={['100%', null, '80%']}
+        background={colorMode === 'light' ? 'white' : 'gray.950'}
       >
         {children}
 

@@ -1,5 +1,5 @@
-import { Flex, Heading, Text } from "@chakra-ui/core";
-import { formatDistance, parseISO } from "date-fns";
+import { Flex, Heading, Text } from '@chakra-ui/react';
+import { formatDistance, parseISO } from 'date-fns';
 
 export type PostCardProps = {
   title: string;
@@ -30,7 +30,7 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
         width="full"
         alignItems="center"
         justifyContent="space-between"
-        flexDir={["column", null, "row"]}
+        flexDir={['column', null, 'row']}
       >
         <Heading
           textAlign="start"
@@ -45,7 +45,7 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
         <Flex
           w="full"
           alignItems="center"
-          justifyContent={["flex-start", null, "flex-end"]}
+          justifyContent={['flex-start', null, 'flex-end']}
         >
           <Text
             fontSize="small"

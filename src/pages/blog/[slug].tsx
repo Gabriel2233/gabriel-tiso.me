@@ -1,19 +1,19 @@
-import matter from "gray-matter";
-import fs from "fs";
-import path from "path";
-import renderToString from "next-mdx-remote/render-to-string";
-import hydrate from "next-mdx-remote/hydrate";
-import mdxPrism from "mdx-prism";
-import readingTime from "reading-time";
-import externalLinks from "remark-external-links";
-import { GetStaticPaths, GetStaticProps } from "next";
-import getAllPosts from "../../lib/blogApi";
-import { Flex, Heading, Text } from "@chakra-ui/core";
-import { Post as PostType } from "../../types/types";
-import Header from "../../components/Header";
-import { Footer } from "../../components/Footer";
-import { BackButton } from "../../components/BackButton";
-import { BlogSeo } from "../../components/BlogSeo";
+import matter from 'gray-matter';
+import fs from 'fs';
+import path from 'path';
+import renderToString from 'next-mdx-remote/render-to-string';
+import hydrate from 'next-mdx-remote/hydrate';
+import mdxPrism from 'mdx-prism';
+import readingTime from 'reading-time';
+import externalLinks from 'remark-external-links';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import getAllPosts from '../../utils/blogApi';
+import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Post as PostType } from '../../types/types';
+import Header from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { BackButton } from '../../components/BackButton';
+import { BlogSeo } from '../../components/BlogSeo';
 
 const Post = (postData: PostType) => {
   const content = hydrate(postData.source);
@@ -73,7 +73,7 @@ const Post = (postData: PostType) => {
 export default Post;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getAllPosts(["slug"]);
+  const posts = getAllPosts(['slug']);
 
   return {
     paths: posts.map((posts) => {
@@ -94,7 +94,7 @@ type Params = {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
-  const postFilePath = path.join("_posts", `${params.slug}.mdx`);
+  const postFilePath = path.join('src/_posts', `${params.slug}.mdx`);
   const source = fs.readFileSync(postFilePath);
   const { data, content } = matter(source);
 

@@ -1,6 +1,6 @@
-import { Flex, Icon, Link, Text, useColorMode } from "@chakra-ui/core";
+import { Flex, Icon, Link, Text, useColorMode } from '@chakra-ui/react';
 
-import { FiGithub } from "react-icons/fi";
+import { FiGithub } from 'react-icons/fi';
 
 export const Footer = () => {
   const { colorMode } = useColorMode();
@@ -9,10 +9,10 @@ export const Footer = () => {
     <Flex w="full" my={6} alignItems="center" justifyContent="center">
       <Text
         fontSize="md"
-        color={colorMode === "light" ? "gray.600" : "gray.400"}
+        color={colorMode === 'light' ? 'gray.600' : 'gray.400'}
       >
-        Made with 💙 by{" "}
-        <Link href="https://github.com/Gabriel2233" target={"_blank"}>
+        Made with 💙 by{' '}
+        <Link href="https://github.com/Gabriel2233" target={'_blank'}>
           Gabriel Tiso <Icon as={FiGithub} />
         </Link>
       </Text>

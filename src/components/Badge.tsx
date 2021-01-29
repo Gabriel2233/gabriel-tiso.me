@@ -1,5 +1,5 @@
-import { Flex, Text, useColorMode } from "@chakra-ui/core";
-import { BadgeProps } from "../types/types";
+import { Flex, Text, useColorMode } from '@chakra-ui/react';
+import { BadgeProps } from '../types/types';
 
 const Badge: React.FC<BadgeProps> = ({ data }) => {
   const { colorMode } = useColorMode();
@@ -7,11 +7,11 @@ const Badge: React.FC<BadgeProps> = ({ data }) => {
     <Flex
       fontSize="small"
       m={2}
-      backgroundColor={colorMode === "dark" ? "gray.700" : "gray.200"}
+      backgroundColor={colorMode === 'dark' ? 'gray.700' : 'gray.200'}
       p={1}
       borderRadius="sm"
     >
-      <Text color={colorMode === "light" ? "blue.500" : "gray.500"}>
+      <Text color={colorMode === 'light' ? 'blue.500' : 'gray.500'}>
         {data}
       </Text>
     </Flex>

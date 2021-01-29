@@ -1,19 +1,15 @@
-/** @jsx jsx */
 import {
   Box,
-  Callout,
   Code,
   Heading,
   Kbd,
   Link,
-  PseudoBox,
   Text,
   Divider,
   useColorMode,
-  Flex,
-} from "@chakra-ui/core";
-import { jsx } from "@emotion/core";
-import NextLink from "next/link";
+  Alert,
+} from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 const Table = (props) => (
   <Box overflowX="scroll" w="full">
@@ -24,8 +20,8 @@ const Table = (props) => (
 const THead = (props) => {
   const { colorMode } = useColorMode();
   const bg = {
-    light: "gray.50",
-    dark: "whiteAlpha.100",
+    light: 'gray.50',
+    dark: 'whiteAlpha.100',
   };
 
   return (
@@ -55,12 +51,12 @@ const TData = (props) => (
 const CustomLink = (props) => {
   const { colorMode } = useColorMode();
   const color = {
-    light: "hsl(208, 99%, 44%)",
-    dark: "hsl(208, 95%, 68%)",
+    light: 'hsl(208, 99%, 44%)',
+    dark: 'hsl(208, 95%, 68%)',
   };
 
   const href = props.href;
-  const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
+  const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
 
   if (isInternalLink) {
     return (
@@ -76,19 +72,19 @@ const CustomLink = (props) => {
 const Quote = (props) => {
   const { colorMode } = useColorMode();
   const bgColor = {
-    light: "blue.50",
-    dark: "blue.900",
+    light: 'blue.50',
+    dark: 'blue.900',
   };
 
   return (
-    <Callout
+    <Alert
       mt={4}
       w="98%"
       bg={bgColor[colorMode]}
       variant="left-accent"
       status="info"
       css={{
-        "> *:first-of-type": {
+        '> *:first-of-type': {
           marginTop: 0,
           marginLeft: 8,
         },
@@ -101,19 +97,19 @@ const Quote = (props) => {
 const DocsHeading = (props) => (
   <Heading
     css={{
-      scrollMarginTop: "100px",
-      scrollSnapMargin: "100px", // Safari
-      "&[id]": {
-        pointerEvents: "none",
+      scrollMarginTop: '100px',
+      scrollSnapMargin: '100px', // Safari
+      '&[id]': {
+        pointerEvents: 'none',
       },
-      "&[id]:before": {
-        display: "block",
-        height: " 6rem",
-        marginTop: "-6rem",
-        visibility: "hidden",
+      '&[id]:before': {
+        display: 'block',
+        height: ' 6rem',
+        marginTop: '-6rem',
+        visibility: 'hidden',
         content: `""`,
       },
-      "&[id]:hover a": { opacity: 1 },
+      '&[id]:hover a': { opacity: 1 },
     }}
     {...props}
     mb="1em"
@@ -122,7 +118,7 @@ const DocsHeading = (props) => (
     <Box pointerEvents="auto">
       {props.children}
       {props.id && (
-        <PseudoBox
+        <Box
           aria-label="anchor"
           as="a"
           color="blue.500"
@@ -130,13 +126,13 @@ const DocsHeading = (props) => (
           outline="none"
           _focus={{
             opacity: 1,
-            boxShadow: "outline",
+            boxShadow: 'outline',
           }}
           opacity={0}
           ml="0.375rem"
         >
           #
-        </PseudoBox>
+        </Box>
       )}
     </Box>
   </Heading>
@@ -145,8 +141,8 @@ const DocsHeading = (props) => (
 const Hr = () => {
   const { colorMode } = useColorMode();
   const borderColor = {
-    light: "gray.200",
-    dark: "gray.600",
+    light: 'gray.200',
+    dark: 'gray.600',
   };
 
   return <Divider borderColor={borderColor[colorMode]} my={4} w="100%" />;
@@ -166,7 +162,7 @@ const MDXComponents = {
       borderRadius="sm"
       marginY={4}
       p={4}
-      width={["90vw", null, "70vw"]}
+      width={['90vw', null, '70vw']}
       overflowX="auto"
       {...props}
     />
