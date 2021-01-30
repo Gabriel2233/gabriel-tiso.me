@@ -7,20 +7,21 @@ import {
   useColorMode,
 } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
-import { Projects } from '../_data/projects';
-import { PageWithPostArr } from '../types/types';
+import { Projects as projects } from '../_data/projects';
+import { PageWithPostArr, PostCardProps } from '../types/types';
 import { Footer } from '../components/Footer';
 import { NextSeo } from 'next-seo';
 import { Meta } from '../components/meta';
 import { ExternalLink } from '../components/ExternalLink';
 import { FiMoon, FiSun } from 'react-icons/fi';
+import { Wrapper } from '../components/Wrapper';
+import { MainCard } from '../components/MainCard';
+import { formatDate } from '../utils/formatDate';
 
 import Link from 'next/link';
 import Header from '../components/Header';
-import ProjectElement from '../components/ProjectElement';
-import PostElement from '../components/PostElement';
 import getAllPosts from '../_lib/blogApi';
-import { Wrapper } from '../components/Wrapper';
+import Badge from '../components/Badge';
 
 const title = 'Gabriel Tiso - Developer';
 const url = 'https://gabriel-tiso-blog.vercel.app';
@@ -74,8 +75,23 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
             Blog
           </Heading>
 
-          {posts.map((post, idx) => (
-            <PostElement postData={post} key={idx} />
+          {posts.map((post: PostCardProps, idx) => (
+            <MainCard
+              description={post.description}
+              title={post.title}
+              key={idx}
+              linkTo={`/blog/${post.slug}`}
+            >
+              <Text
+                fontSize="15px"
+                color="gray.600"
+                pl={8}
+                pr={4}
+                py={[4, null, 0]}
+              >
+                {formatDate(post.date)} ago
+              </Text>
+            </MainCard>
           ))}
         </Wrapper>
 
@@ -84,8 +100,16 @@ const Home: React.FC<PageWithPostArr> = ({ posts }) => {
             Projects
           </Heading>
 
-          {Projects.map((project) => (
-            <ProjectElement projectData={project} key={project.githubLink} />
+          {projects.map((project, idx) => (
+            <MainCard
+              title={project.name}
+              description={project.description}
+              key={idx}
+            >
+              {project.badges.map((badge) => (
+                <Badge data={badge} key={badge} />
+              ))}
+            </MainCard>
           ))}
         </Wrapper>
 

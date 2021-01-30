@@ -1,15 +1,17 @@
-import PostElement from '../../components/PostElement';
 import Link from 'next/link';
 import Header from '../../components/Header';
-import { PageWithPostArr } from '../../types/types';
+import getAllPosts from '../../_lib/blogApi';
+import React from 'react';
+import { PageWithPostArr, PostCardProps } from '../../types/types';
+import { NextSeo } from 'next-seo';
 import { GetStaticProps } from 'next';
-import { Heading, Box, Flex, Input } from '@chakra-ui/react';
+import { Heading, Flex, Input, Text } from '@chakra-ui/react';
 import { Footer } from '../../components/Footer';
 import { BackButton } from '../../components/BackButton';
-import { NextSeo } from 'next-seo';
 import { Meta } from '../../components/meta';
-import getAllPosts from '../../_lib/blogApi';
 import { Wrapper } from '../../components/Wrapper';
+import { MainCard } from '../../components/MainCard';
+import { formatDate } from '../../utils/formatDate';
 
 const title = 'Blog - Gabriel Tiso';
 const url = 'https://gabriel-tiso-blog.vercel.app/blog';
@@ -36,17 +38,19 @@ const Blog: React.FC<PageWithPostArr> = ({ posts }) => {
         </Header>
 
         <Wrapper>
-          <Flex w="full" bg="red.200">
-            <Input mx="auto" placeholder="Search..." />
-          </Flex>
-
           <Heading size="xl" m={6}>
             Blog
           </Heading>
-          {posts.map((post) => (
-            <Link href="/blog/[slug]" as={`/blog/${post.slug}`} key={post.slug}>
-              <PostElement postData={post} />
-            </Link>
+          {posts.map((post: PostCardProps, idx) => (
+            <MainCard
+              title={post.title}
+              description={post.description}
+              linkTo={`blog/${post.slug}`}
+            >
+              <Text color="gray.600" pl={8} pr={4} py={[4, null, 0]}>
+                {formatDate(post.date)} ago
+              </Text>
+            </MainCard>
           ))}
         </Wrapper>
         <Footer />

@@ -1,25 +1,25 @@
-import { Flex, Heading, Text } from '@chakra-ui/react';
-import { formatDistance, parseISO } from 'date-fns';
-import Link from 'next/link';
+import { Flex, FlexProps, Heading, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { HTMLAttributes } from 'react';
 
-export type PostCardProps = {
+interface CardProps extends HTMLAttributes<FlexProps> {
   title: string;
   description: string;
-  date: string;
-  slug: string;
-  author: string;
-};
+  linkTo?: string;
+}
 
-type PageProps = {
-  postData: PostCardProps;
-};
-
-const PostElement: React.FC<PageProps> = ({ postData }) => {
-  const postDateFromNow = formatDistance(parseISO(postData.date), new Date());
+export const MainCard: React.FC<CardProps> = ({
+  children,
+  title,
+  description,
+  linkTo,
+}) => {
+  const router = useRouter();
 
   return (
-    <Link href={`/blog/${postData.slug}`}>
+    <>
       <Flex
+        onClick={linkTo ? () => router.push(linkTo) : () => {}}
         w="full"
         flexDir="column"
         cursor="pointer"
@@ -42,7 +42,7 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
             paddingX={6}
             paddingY={4}
           >
-            {postData.title}
+            {title}
           </Heading>
 
           <Flex
@@ -50,15 +50,7 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
             alignItems="center"
             justifyContent={['flex-start', null, 'flex-end']}
           >
-            <Text
-              fontSize="15px"
-              color="gray.600"
-              pl={8}
-              pr={4}
-              py={[4, null, 0]}
-            >
-              {postDateFromNow} ago
-            </Text>
+            {children}
           </Flex>
         </Flex>
 
@@ -70,11 +62,9 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
           width="full"
           color="black.600"
         >
-          {postData.description}
+          {description}
         </Text>
       </Flex>
-    </Link>
+    </>
   );
 };
-
-export default PostElement;

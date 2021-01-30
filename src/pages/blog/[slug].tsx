@@ -128,7 +128,10 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
     scope: data,
   });
 
-  const thumbnailUrl = `http://localhost:3000/api/thumbnail?title=${data.title}&thumbnail_bg=1b1b1b`;
+  const thumbnailUrl =
+    process.env.NODE_ENV === 'development'
+      ? `${process.env.NEXT_PUBLIC_DEV_URL}/api/thumbnail?title=${data.title}&thumbnail_bg=1b1b1b`
+      : `${process.env.NEXT_PUBLIC_PROD_URL}/api/thumbnail?title=${data.title}&thumbnail_bg=1b1b1b`;
 
   return {
     props: {

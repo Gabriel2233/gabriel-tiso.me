@@ -10,7 +10,6 @@ export const Wrapper: React.FC = ({ children }) => {
       flexDir="column"
       px={6}
       py={4}
-      bg="red.200"
     >
       {children}
     </Flex>
