@@ -1,5 +1,6 @@
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import { formatDistance, parseISO } from 'date-fns';
+import Link from 'next/link';
 
 export type PostCardProps = {
   title: string;
@@ -17,58 +18,62 @@ const PostElement: React.FC<PageProps> = ({ postData }) => {
   const postDateFromNow = formatDistance(parseISO(postData.date), new Date());
 
   return (
-    <Flex
-      flexDir="column"
-      cursor="pointer"
-      alignItems="center"
-      m={4}
-      borderWidth={2}
-      borderRadius="sm"
-      borderColor="black.400"
-    >
+    <Link href={`/blog/${postData.slug}`}>
       <Flex
-        width="full"
+        w="full"
+        flexDir="column"
+        cursor="pointer"
         alignItems="center"
-        justifyContent="space-between"
-        flexDir={['column', null, 'row']}
+        my={2}
+        borderWidth={2}
+        borderRadius="sm"
+        borderColor="black.400"
       >
-        <Heading
-          textAlign="start"
-          size="lg"
-          width="full"
-          paddingX={6}
-          paddingY={4}
-        >
-          {postData.title}
-        </Heading>
-
         <Flex
-          w="full"
+          width="full"
           alignItems="center"
-          justifyContent={['flex-start', null, 'flex-end']}
+          justifyContent="space-between"
+          flexDir={['column', null, 'row']}
         >
-          <Text
-            fontSize="small"
-            color="gray.600"
-            pl={8}
-            pr={4}
-            py={[4, null, 0]}
+          <Heading
+            textAlign="start"
+            size="md"
+            width="full"
+            paddingX={6}
+            paddingY={4}
           >
-            {postDateFromNow} ago
-          </Text>
-        </Flex>
-      </Flex>
+            {postData.title}
+          </Heading>
 
-      <Text
-        paddingBottom={4}
-        paddingX={6}
-        textAlign="start"
-        width="full"
-        color="black.600"
-      >
-        {postData.description}
-      </Text>
-    </Flex>
+          <Flex
+            w="full"
+            alignItems="center"
+            justifyContent={['flex-start', null, 'flex-end']}
+          >
+            <Text
+              fontSize="15px"
+              color="gray.600"
+              pl={8}
+              pr={4}
+              py={[4, null, 0]}
+            >
+              {postDateFromNow} ago
+            </Text>
+          </Flex>
+        </Flex>
+
+        <Text
+          paddingBottom={4}
+          paddingX={6}
+          fontSize="15px"
+          textAlign="start"
+          width="full"
+          color="black.600"
+        >
+          {postData.description}
+        </Text>
+      </Flex>
+    </Link>
   );
 };
 

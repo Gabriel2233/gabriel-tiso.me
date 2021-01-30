@@ -1,15 +1,15 @@
 import PostElement from '../../components/PostElement';
-
-import { Heading, Box, Flex, Button, Icon } from '@chakra-ui/react';
 import Link from 'next/link';
-import { GetStaticProps } from 'next';
-import getAllPosts from '../../utils/blogApi';
 import Header from '../../components/Header';
 import { PageWithPostArr } from '../../types/types';
+import { GetStaticProps } from 'next';
+import { Heading, Box, Flex, Input } from '@chakra-ui/react';
 import { Footer } from '../../components/Footer';
 import { BackButton } from '../../components/BackButton';
 import { NextSeo } from 'next-seo';
 import { Meta } from '../../components/meta';
+import getAllPosts from '../../_lib/blogApi';
+import { Wrapper } from '../../components/Wrapper';
 
 const title = 'Blog - Gabriel Tiso';
 const url = 'https://gabriel-tiso-blog.vercel.app/blog';
@@ -35,18 +35,20 @@ const Blog: React.FC<PageWithPostArr> = ({ posts }) => {
           <BackButton />
         </Header>
 
-        <Flex width={'70%'} flexDir="column" justifyContent="center">
+        <Wrapper>
+          <Flex w="full" bg="red.200">
+            <Input mx="auto" placeholder="Search..." />
+          </Flex>
+
           <Heading size="xl" m={6}>
             Blog
           </Heading>
           {posts.map((post) => (
             <Link href="/blog/[slug]" as={`/blog/${post.slug}`} key={post.slug}>
-              <Box>
-                <PostElement postData={post} />
-              </Box>
+              <PostElement postData={post} />
             </Link>
           ))}
-        </Flex>
+        </Wrapper>
         <Footer />
       </Flex>
     </>

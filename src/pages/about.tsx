@@ -3,10 +3,11 @@ import { NextSeo } from 'next-seo';
 import { BackButton } from '../components/BackButton';
 import { ExternalLink } from '../components/ExternalLink';
 import { Footer } from '../components/Footer';
-import Header from '../components/Header';
 import { Meta } from '../components/meta';
 import { TechCard } from '../components/TechCard';
 import { TechILove } from '../_data/technologies';
+import Header from '../components/Header';
+import { Wrapper } from '../components/Wrapper';
 
 const url = 'https://gabriel-tiso-blog.vercel.app/about';
 const title = 'Gabriel Tiso - About me';
@@ -17,13 +18,11 @@ const About = () => {
       <Meta />
       <NextSeo title={title} canonical={url} openGraph={{ title, url }} />
       <Flex w="100vw" h="100vh" flexDir="column" alignItems="center">
-        <Flex w={'70%'} flexDir="column" alignItems="center">
-          <Header>
-            <BackButton />
-          </Header>
-        </Flex>
-        <Flex w={['90%', null, '70%']} flexDir="column" alignItems="flex-start">
-          <Heading size="2xl" py={12}>
+        <Header>
+          <BackButton />
+        </Header>
+        <Wrapper>
+          <Heading size="xl" py={12}>
             About Me
           </Heading>
 
@@ -79,7 +78,7 @@ const About = () => {
           </Flex>
 
           <Footer />
-        </Flex>
+        </Wrapper>
       </Flex>
     </>
   );

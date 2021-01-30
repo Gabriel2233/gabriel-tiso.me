@@ -21,7 +21,7 @@ export const TechCard: React.FC<Props> = ({ techData }) => {
     >
       <Image src={techData.path} w="100%" />
 
-      <Text fontSize="md" pt={5}>
+      <Text fontSize="18px" pt={5}>
         {techData.name}
       </Text>
     </Flex>

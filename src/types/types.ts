@@ -23,7 +23,9 @@ export type Post = {
     date: string;
     description: string;
     author: string;
+    tags: string[];
   };
+  thumbnailUrl: string;
   slug: string;
   source: any;
 };

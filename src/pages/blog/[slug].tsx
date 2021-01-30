@@ -3,20 +3,22 @@ import fs from 'fs';
 import path from 'path';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
-import mdxPrism from 'mdx-prism';
 import readingTime from 'reading-time';
 import externalLinks from 'remark-external-links';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import getAllPosts from '../../utils/blogApi';
-import { Flex, Heading, Text } from '@chakra-ui/react';
-import { Post as PostType } from '../../types/types';
 import Header from '../../components/Header';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { Flex, Heading, Text, useColorMode } from '@chakra-ui/react';
+import { Post as PostType } from '../../types/types';
 import { Footer } from '../../components/Footer';
 import { BackButton } from '../../components/BackButton';
 import { BlogSeo } from '../../components/BlogSeo';
+import getAllPosts from '../../_lib/blogApi';
+import { Wrapper } from '../../components/Wrapper';
+import Badge from '../../components/Badge';
 
 const Post = (postData: PostType) => {
   const content = hydrate(postData.source);
+  const { colorMode } = useColorMode();
 
   return (
     <>
@@ -41,13 +43,13 @@ const Post = (postData: PostType) => {
             <BackButton />
           </Header>
 
-          <Flex
-            w="70%"
-            alignItems="flex-start"
-            justifyContent="center"
-            flexDir="column"
-            py={6}
-          >
+          <Wrapper>
+            <Flex w="full" align="center">
+              {postData.frontMatter.tags.map((tag) => (
+                <Badge data={tag} key={tag} />
+              ))}
+            </Flex>
+
             <Flex>
               <Heading>{postData.frontMatter.title}</Heading>
             </Flex>
@@ -61,10 +63,31 @@ const Post = (postData: PostType) => {
               <Text fontSize="md">By {postData.frontMatter.author}</Text>
               <Text fontSize="md">{postData.readingTime.text}</Text>
             </Flex>
+
+            <img
+              src={postData.thumbnailUrl}
+              alt={postData.frontMatter.title}
+              width="100%"
+              height="200px"
+              style={{
+                marginTop: '1rem',
+                marginBottom: '1rem',
+                borderRadius: '16px',
+                boxShadow: `0 4px 14px ${
+                  colorMode === 'light'
+                    ? 'rgba(0, 0, 0, 0.5)'
+                    : 'rgba(255, 255, 255, 0.18)'
+                }`,
+              }}
+            />
+          </Wrapper>
+
+          <Flex w={['90%', null, '48%']} flexDir="column">
             {content}
-            <Footer />
           </Flex>
         </Flex>
+
+        <Footer />
       </Flex>
     </>
   );
@@ -101,10 +124,11 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
   const mdxSource = await renderToString(content, {
     mdxOptions: {
       remarkPlugins: [externalLinks],
-      rehypePlugins: [mdxPrism],
     },
     scope: data,
   });
+
+  const thumbnailUrl = `http://localhost:3000/api/thumbnail?title=${data.title}&thumbnail_bg=1b1b1b`;
 
   return {
     props: {
@@ -112,6 +136,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
       readingTime: readingTime(content),
       source: mdxSource,
       frontMatter: data,
+      thumbnailUrl,
     },
   };
 };

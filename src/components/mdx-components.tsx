@@ -83,6 +83,7 @@ const Quote = (props) => {
       bg={bgColor[colorMode]}
       variant="left-accent"
       status="info"
+      rounded="4px"
       css={{
         '> *:first-of-type': {
           marginTop: 0,
@@ -156,13 +157,13 @@ const MDXComponents = {
     <Code variantColor="yellow" fontSize="0.84em" {...props} />
   ),
   code: (props) => (
-    <Box
+    <Code
+      w="full"
       background="#001233"
       color="white"
       borderRadius="sm"
       marginY={4}
       p={4}
-      width={['90vw', null, '70vw']}
       overflowX="auto"
       {...props}
     />
