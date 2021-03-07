@@ -39,4 +39,4 @@ yarn
 yarn dev
 ```
 
-That's it! You're ready to go :smiley:
+That's it! You're ready to go :muscle:
