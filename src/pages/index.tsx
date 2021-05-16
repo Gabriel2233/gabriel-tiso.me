@@ -1,10 +1,18 @@
+import { GetStaticProps } from 'next'
+
 import { Container, Wrapper } from '../styles/pages/home'
 
 import { Logo } from '../components/Logo'
-import { PostCard } from '../components/PostCard'
+import PostCard from '../components/PostCard'
 
-export default function Home() {
+import { getPosts } from '../api/posts'
+import { Post } from '../types'
 
+type HomeProps = {
+  posts: Post[]
+}
+
+export default function Home({ posts }: HomeProps) {
   return (
     <Container>
       <header>
@@ -14,11 +22,21 @@ export default function Home() {
       <Wrapper>
         <h1>Posts</h1>
 
-        {[1, 2, 3].map(id => (
-          <PostCard key={id} />
+        {posts.map((post, idx) => (
+          <PostCard postData={post} href={`/posts/${post.data.slug}`} key={idx} />
         ))}
       </Wrapper>
     </Container>
   )
 }
 
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = getPosts()
+
+  return {
+    props: {
+      posts
+    }
+  }
+}

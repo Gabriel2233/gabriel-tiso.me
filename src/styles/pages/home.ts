@@ -15,7 +15,7 @@ export const Container = styled.main`
 `
 
 export const Wrapper = styled.section`
-  width: 860px;
+  width: 75%;
   max-width: 1480px;
   display: flex;
   align-items: flex-start;
