@@ -7,7 +7,7 @@ type PostProps = {
   href: string;
 }
 
-export default function PostCard({ postData, href }: PostProps) {
+export function PostCard({ postData, href }: PostProps) {
   return (
     <Link href={href}>
       <Container>

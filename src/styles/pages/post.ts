@@ -10,7 +10,7 @@ export const Container = styled.main`
 `
 
 export const Wrapper = styled.section`
-  width: 75%;
+  width: 60%;
   max-width: 1480px;
   display: flex;
   align-items: flex-start;
@@ -22,7 +22,31 @@ export const Wrapper = styled.section`
   h1 {
     font: 900 2.5rem "Inter", sans-serif;
     line-height: 1.5rem;
-    text-align: start;
     margin-bottom: 1.85rem;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    time, p {
+      font: 400 0.95rem "Inter", sans-serif;
+      color: var(--gray-250);
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    margin: 0.875rem 0;
+    border: 0;
+    border-radius: 0.5rem;
+    margin: 3rem 0;
+  }
+
+  @media(max-width: 768px) {
+    width: 95%;
   }
 `

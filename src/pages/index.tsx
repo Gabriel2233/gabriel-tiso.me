@@ -2,8 +2,8 @@ import { GetStaticProps } from 'next'
 
 import { Container, Wrapper } from '../styles/pages/home'
 
-import { Logo } from '../components/Logo'
-import PostCard from '../components/PostCard'
+import { PostCard } from '../components/PostCard'
+import { Header } from '../components/Header'
 
 import { getPosts } from '../api/posts'
 import { Post } from '../types'
@@ -15,9 +15,7 @@ type HomeProps = {
 export default function Home({ posts }: HomeProps) {
   return (
     <Container>
-      <header>
-        <Logo />
-      </header>
+      <Header />
 
       <Wrapper>
         <h1>Posts</h1>
@@ -32,7 +30,7 @@ export default function Home({ posts }: HomeProps) {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getPosts()
+  const posts = await getPosts()
 
   return {
     props: {

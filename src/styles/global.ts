@@ -10,9 +10,10 @@ export default createGlobalStyle`
   :root {
     --light-blue: #e8f4f8;
     --main-blue: #0070f3;
+    --dark-blue: #000023;
     --white: #fff;
     --gray-250: #696969;
-    --gray-500: #8c8c8c
+    --gray-500: #8c8c8c;
     --gray-750: #4d4d4d;
     --black: #000;
   }

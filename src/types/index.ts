@@ -4,6 +4,7 @@ export type Post = {
     slug: string;
     createdAt: string;
     short: string;
+    image: string;
   }
   content: string;
 }

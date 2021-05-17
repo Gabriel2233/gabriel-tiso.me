@@ -2,15 +2,36 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { getPosts, getPost } from '../../api/posts'
 import { Post as TPost } from '../../types'
 
+import { Container, Wrapper } from '../../styles/pages/post'
+import { Header } from '../../components/Header'
+
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote'
+
 type PostProps = {
   post: TPost
+  source: any
 }
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, source }: PostProps) {
+
   return (
-    <>
-      {post.data.title}
-    </>
+    <Container>
+      <Header />
+
+      <Wrapper>
+        <h1>{post.data.title}</h1>
+
+        <div>
+          <time>{post.data.createdAt}</time>
+          <p>&bull; 3 minute read</p>
+        </div>
+
+        <img src={post.data.image} alt="Banner" />
+
+        <MDXRemote {...source} />
+      </Wrapper>
+    </Container>
   )
 }
 
@@ -30,10 +51,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = getPost(String(params.slug))
+  const source = await serialize(post.content)
 
   return {
     props: {
-      post
-    }
+      post,
+      source
+    },
+    revalidate: 60 * 60 * 24
   }
 }
+

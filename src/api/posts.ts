@@ -2,11 +2,13 @@ import matter from 'gray-matter'
 import path from 'path'
 import fs from 'fs'
 
+import { Post } from '../types'
+
 import { format } from 'date-fns'
 
 const postsDirectory = path.join(process.cwd(), "/src/_posts")
 
-function readFileFromPath(path: string) {
+function readFileFromPath(path: string): Post {
   const file = fs.readFileSync(path)
   const { data, content } = matter(file)
 
@@ -15,7 +17,8 @@ function readFileFromPath(path: string) {
       title: data.title,
       slug: data.slug,
       createdAt: format(new Date(data.createdAt), "MMM d"),
-      short: data.short
+      short: data.short,
+      image: data.image,
     },
     content
   }
@@ -23,7 +26,7 @@ function readFileFromPath(path: string) {
   return post
 }
 
-export function getPosts() {
+export function getPosts(): Post[] {
   let posts = []
   const files = fs.readdirSync(postsDirectory)
 
@@ -37,7 +40,7 @@ export function getPosts() {
   return posts;
 }
 
-export function getPost(slug: string) {
+export function getPost(slug: string): Post {
   const filePath = path.join(postsDirectory, `${slug}.md`)
   const post = readFileFromPath(filePath)
 
