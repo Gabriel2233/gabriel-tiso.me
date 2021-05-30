@@ -21,7 +21,6 @@ export const Wrapper = styled.section`
 
   h1 {
     font: 900 2.5rem "Inter", sans-serif;
-    line-height: 1.5rem;
     margin-bottom: 1.85rem;
   }
 

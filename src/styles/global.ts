@@ -8,6 +8,8 @@ export default createGlobalStyle`
   }
 
   :root {
+    --light-yellow: #fff2b2;
+    --main-yellow: #ffd819;
     --light-blue: #e8f4f8;
     --main-blue: #0070f3;
     --dark-blue: #000023;
@@ -24,7 +26,7 @@ export default createGlobalStyle`
     }
   }
 
-  @media(max-width: 1000px) {
+  @media(max-width: 860px) {
     html {
       font-size: 87.5%
     }
@@ -38,7 +40,7 @@ export default createGlobalStyle`
   body, input, textarea, select, button {
     font: 400 1rem "Inter", sans-serif;
   }
-
+  
   button {
     cursor: pointer;
   }

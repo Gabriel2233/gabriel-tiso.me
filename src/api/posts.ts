@@ -17,7 +17,7 @@ function readFileFromPath(path: string): Post {
       title: data.title,
       slug: data.slug,
       createdAt: format(new Date(data.createdAt), "MMM d"),
-      short: data.short,
+      description: data.description,
       image: data.image,
     },
     content

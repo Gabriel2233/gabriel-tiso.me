@@ -15,12 +15,11 @@ export function PostCard({ postData, href }: PostProps) {
           <h2>{postData.data.title}</h2>
           <div>
             <time>{postData.data.createdAt}</time>
-            <span>&bull; 3 minute read</span>
           </div>
         </section>
 
         <section>
-          <p>{postData.data.short}</p>
+          <p>{postData.data.description}</p>
         </section>
       </Container>
     </Link>

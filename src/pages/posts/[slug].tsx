@@ -14,7 +14,6 @@ type PostProps = {
 }
 
 export default function Post({ post, source }: PostProps) {
-
   return (
     <Container>
       <Header />
@@ -24,7 +23,6 @@ export default function Post({ post, source }: PostProps) {
 
         <div>
           <time>{post.data.createdAt}</time>
-          <p>&bull; 3 minute read</p>
         </div>
 
         <img src={post.data.image} alt="Banner" />
@@ -51,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = getPost(String(params.slug))
-  const source = await serialize(post.content)
+  const source = await serialize(post.content, {scope: post.data})
 
   return {
     props: {
